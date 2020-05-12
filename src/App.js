@@ -24,7 +24,8 @@ function movies(state = initialMovies, action) {
   switch (action.type) {
     case 'ADD_MOVIE':
       return {
-        ...state, list: [...state.list, action.item]
+        ...state,
+        list: [...state.list, action.item]
       };
     case 'DELETE_MOVIE':
       index = state.list.indexOf(action.item);
@@ -33,13 +34,18 @@ function movies(state = initialMovies, action) {
         ...state
       };
     case 'UPDATE_MOVIE':
+	    const newList = [...state.list];
       index = state.list.indexOf(action.oldItem, 0);
-      if (index !== -1) state.list[index] = action.newItem;
+      if (index !== -1) newList[index] = action.newItem;
       return {
-        ...state
+	      ...state,
+	      list: [...newList]
       };
     case 'RESET_MOVIES':
-      return {...state, list: []};
+      return {
+        ...state,
+        list: []
+      };
     default:
       return state
   }
@@ -50,7 +56,8 @@ function actors(state = initialActors, action) {
   switch (action.type) {
     case 'ADD_ACTOR':
       return {
-        ...state, list: [...state.list, action.item]
+        ...state,
+        list: [...state.list, action.item]
       };
     case 'DELETE_ACTOR':
       index = state.list.indexOf(action.item);
@@ -58,14 +65,19 @@ function actors(state = initialActors, action) {
       return {
         ...state
       };
-    case 'UPDATE_ACTOR':
+	  case 'UPDATE_ACTOR':
+    	const newList = [...state.list];
       index = state.list.indexOf(action.oldItem, 0);
-      if (index !== -1) state.list[index] = action.newItem;
+	    if (index !== -1) newList[index] = action.newItem;
       return {
-        ...state
+        ...state,
+	      list: [...newList]
       };
     case 'RESET_ACTORS':
-      return {...state, list: []};
+      return {
+        ...state,
+        list: []
+      };
     default:
       return state
   }
